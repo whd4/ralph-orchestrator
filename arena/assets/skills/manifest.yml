@@ -1,0 +1,135 @@
+# Agent Arena — Skills Manifest
+# All portable skills available to any agent via the Arena.
+# Skills are stored as Markdown files with YAML frontmatter.
+# Source paths are relative to the ralph-orchestrator repo root.
+
+version: "1.0"
+
+skills:
+  # ─── Development Skills (portable to any coding agent) ──────────────
+
+  code-assist:
+    source: .claude/skills/code-assist/SKILL.md
+    description: "Guides implementation via Explore → Plan → Code → Commit workflow with TDD"
+    portable: true
+    capabilities: [code, plan, review]
+    agents: [ralph, hermes, openclaw]
+
+  code-task-generator:
+    source: .claude/skills/code-task-generator/SKILL.md
+    description: "Generate structured .code-task.md files from descriptions or PDD plans"
+    portable: true
+    capabilities: [plan]
+    agents: [ralph, hermes, openclaw]
+
+  test-driven-development:
+    source: .claude/skills/test-driven-development/SKILL.md
+    description: "RED → GREEN → REFACTOR cycle from specs, tasks, or descriptions"
+    portable: true
+    capabilities: [code]
+    agents: [ralph, hermes, openclaw]
+
+  pdd:
+    source: .claude/skills/pdd/SKILL.md
+    description: "Transform rough ideas into detailed designs with implementation plans"
+    portable: true
+    capabilities: [plan, research]
+    agents: [ralph, hermes, openclaw]
+
+  review-pr:
+    source: .claude/skills/review-pr/SKILL.md
+    description: "Run structured PR review with tests, diff analysis, and report"
+    portable: true
+    capabilities: [review, code]
+    agents: [ralph, hermes, openclaw]
+
+  find-code-tasks:
+    source: .claude/skills/find-code-tasks/SKILL.md
+    description: "Display all .code-task.md files with status and metadata"
+    portable: true
+    capabilities: [plan]
+    agents: [ralph, hermes, openclaw]
+
+  # ─── Browser & UI Skills ────────────────────────────────────────────
+
+  playwriter:
+    source: .claude/skills/playwriter/SKILL.md
+    description: "Playwright Page scripts against local Chrome (preserves logins)"
+    portable: true
+    capabilities: [browse]
+    agents: [ralph, hermes, openclaw]
+
+  tui-validate:
+    source: .claude/skills/tui-validate/SKILL.md
+    description: "Validate TUI output using freeze screenshots + LLM-as-judge"
+    portable: false  # Ralph-specific (uses ralph TUI)
+    capabilities: [terminal]
+    agents: [ralph]
+
+  tui-debug-in-pane:
+    source: .claude/skills/tui-debug-in-pane/SKILL.md
+    description: "Debug TUI rendering in tmux split pane"
+    portable: false
+    capabilities: [terminal]
+    agents: [ralph]
+
+  tmux-terminal:
+    source: .claude/skills/tmux-terminal/SKILL.md
+    description: "Drive interactive terminal sessions via tmux"
+    portable: true
+    capabilities: [terminal]
+    agents: [ralph, hermes, openclaw]
+
+  # ─── Ralph-Specific Skills ──────────────────────────────────────────
+
+  ralph-operations:
+    source: .claude/skills/ralph-operations/SKILL.md
+    description: "Manage, monitor, and diagnose Ralph orchestration loops"
+    portable: false
+    capabilities: [terminal]
+    agents: [ralph]
+
+  ralph-tools:
+    source: .claude/skills/ralph-tools/SKILL.md
+    description: "Runtime task and memory management during orchestration"
+    portable: false
+    capabilities: [terminal]
+    agents: [ralph]
+
+  create-hat-collection:
+    source: .claude/skills/create-hat-collection/SKILL.md
+    description: "Generate Ralph hat collection presets via guided conversation"
+    portable: false
+    capabilities: [plan]
+    agents: [ralph]
+
+  evaluate-presets:
+    source: .claude/skills/evaluate-presets/SKILL.md
+    description: "Test all hat collection presets via shell scripts"
+    portable: false
+    capabilities: [terminal]
+    agents: [ralph]
+
+  release-bump:
+    source: .claude/skills/release-bump/SKILL.md
+    description: "Bump version and trigger release for ralph-orchestrator"
+    portable: false
+    capabilities: [terminal]
+    agents: [ralph]
+
+  # ─── Demo & Documentation Skills ───────────────────────────────────
+
+  pr-demo:
+    source: .claude/skills/pr-demo/SKILL.md
+    description: "Create terminal demo GIFs via asciinema for PR documentation"
+    portable: true
+    capabilities: [terminal]
+    agents: [ralph, hermes, openclaw]
+
+# ─── Summary ────────────────────────────────────────────────────────
+# Total skills: 16
+# Portable (any agent): 9
+# Ralph-only: 7
+# External repos (not yet imported):
+#   - whd4/expert-ai-skills: 233 additional skills
+#   - whd4/superpowers: Core skills library v3.6.2

@@ -1,0 +1,100 @@
+# Agent Arena — Unified MCP Registry
+# All MCPs available to any agent via the Arena's MCP Hub.
+# Agents receive a filtered view based on task scope.
+# Credentials are resolved from vault, never stored here.
+
+version: "1.0"
+
+mcps:
+  # --- Developer Tools ---
+  github:
+    server: "@anthropic/github-mcp-server"
+    description: "PRs, issues, code search, CI status"
+    scope:
+      - "whd4/ralph-orchestrator"
+      - "whd4/BMAD-METHODV7"
+      - "whd4/superpowers"
+      - "whd4/expert-ai-skills"
+      - "whd4/claude-task-master"
+      - "whd4/spec-kit"
+      - "whd4/Archimedius-os"
+      - "whd4/bmad-mcp-server"
+      - "whd4/codewiki"
+      - "whd4/whd4"
+    credentials: vault://github-token
+    capabilities: [code, issues, pull_requests, ci]
+
+  # --- Knowledge & Documentation ---
+  notion:
+    server: "@notionhq/notion-mcp-server"
+    description: "Workspace: GitHub Projects Board, 14+ project pages"
+    credentials: vault://notion-integration-token
+    capabilities: [search, read, write, databases]
+
+  microsoft-docs:
+    server: "@anthropic/microsoft-docs-mcp"
+    description: "Search Azure, M365, Microsoft Learn documentation"
+    capabilities: [search, fetch]
+
+  context7:
+    server: "@anthropic/context7-mcp"
+    description: "Live library/framework docs (React, Next.js, Prisma, etc.)"
+    capabilities: [search, fetch]
+
+  # --- Communication ---
+  gmail:
+    server: "@anthropic/gmail-mcp-server"
+    description: "Read/search/draft emails (whittdwyer@gmail.com)"
+    credentials: vault://gmail-oauth
+    capabilities: [search, read, draft]
+
+  # --- Design ---
+  figma:
+    server: "@anthropic/figma-mcp-server"
+    description: "Read designs, screenshots, Code Connect"
+    credentials: vault://figma-token
+    capabilities: [read, screenshot, code_connect]
+
+  canva:
+    server: "@anthropic/canva-mcp-server"
+    description: "Create/edit designs, presentations, documents"
+    credentials: vault://canva-token
+    capabilities: [search, create, edit, export]
+
+  # --- Data & Infrastructure ---
+  supabase:
+    server: "@supabase/mcp-server"
+    description: "Database, edge functions, migrations (0 projects currently)"
+    credentials: vault://supabase-key
+    capabilities: [sql, functions, migrations, projects]
+
+  # --- AI & Research ---
+  huggingface:
+    server: "@anthropic/huggingface-mcp"
+    description: "AI models, papers, datasets (authenticated: kingwhd4)"
+    credentials: vault://hf-token
+    capabilities: [search, models, papers, spaces]
+
+  huggingface-image:
+    server: "@anthropic/huggingface-image-mcp"
+    description: "Generate images via AI models"
+    capabilities: [generate]
+
+  # --- Visualization ---
+  mermaid:
+    server: "@anthropic/mermaid-mcp-server"
+    description: "Render Mermaid diagrams to SVG/PNG"
+    capabilities: [validate, render]
+
+  # --- Documents ---
+  craft-docs:
+    server: "@anthropic/craft-mcp-server"
+    description: "Craft Docs workspace (My Space)"
+    credentials: vault://craft-token
+    capabilities: [read, write, search, whiteboard]
+
+  # --- Government ---
+  gov-contracts:
+    server: "@anthropic/gov-contracts-mcp"
+    description: "Search SAM.gov, GSA, FPDS for government contracts"
+    capabilities: [search, details, opportunities]
