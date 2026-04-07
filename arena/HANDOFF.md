@@ -1,98 +1,103 @@
-# Session Handoff — Digital Twin Personality Engine Bootstrap
+# Session Handoff — OCAC Digital Twin: Docs Saved, Ready to Bootstrap
 
-> **Session**: happy-discovering-squirrel (2026-04-06)
+> **Sessions**: happy-discovering-squirrel (2026-04-06 → 2026-04-07)
 > **Branch**: `claude/continue-handoff-tasks-hUdpJ`
-> **Status**: Ready for PRD intake. Arena foundation shipped. Next session receives 9 docs.
+> **Status**: COMPLETE — All OCAC specs saved. Ready to create ~/ocac project locally.
 
 ---
 
-## WHAT WAS DONE THIS SESSION
+## WHAT WAS DONE
 
-### 1. Full System Audit
-- Scanned all 13 MCP servers (GitHub, Notion, Gmail, Supabase, Canva, Figma, HuggingFace, Craft Docs, Microsoft Docs, Context7, Gov Contracts, Mermaid, HF Image Gen)
-- Mapped all 10 GitHub projects from Notion (3 active, 2 moderate, 3 stale, 2 inactive)
-- Cataloged 18 skills, 3 agents, 45 code tasks (41 completed)
-- Ran cargo test: 237 pass, 2 fail (known ACP grandchild process cleanup issue)
-- User: whittdwyer@gmail.com / kingwhd4 on HuggingFace
+### Session 1 (2026-04-06): Arena Foundation
+- Full system audit (13 MCPs, 18 skills, 3 agents, 237 tests passing)
+- Agent Arena foundation (928 lines) — detachable asset layer
+- OpenClaw + Hermes agent adapters wired in
+- Agent runtimes installed (OpenClaw v2026.4.5, Hermes v0.7.0)
 
-### 2. Agent Arena Foundation (928 lines, committed + pushed)
+### Session 2 (2026-04-07): OCAC Docs Persisted
+- User pasted 9 OCAC documents (PRD + supporting specs)
+- Synthesized and saved as 7 structured markdown files
+- Updated this handoff with complete setup instructions
+- Everything committed and pushed
 
-**Files created:**
-| File | Purpose |
+---
+
+## OCAC DOCS (Saved to `arena/docs/ocac/`)
+
+| File | Content |
 |------|---------|
-| `.ralph/specs/agent-arena.spec.md` | Full design spec — the detachable asset layer |
-| `arena/adapters/protocol.ts` | Agent Adapter Protocol (AAP) — TypeScript interfaces |
-| `arena/adapters/ralph-adapter.ts` | Ralph -> AAP adapter |
-| `arena/adapters/openclaw-adapter.ts` | OpenClaw -> AAP adapter |
-| `arena/adapters/hermes-adapter.ts` | Hermes Agent -> AAP adapter |
-| `arena/assets/tools/mcp-registry.yml` | Unified registry of all 13 MCPs |
-| `arena/assets/skills/manifest.yml` | 16 skills cataloged (9 portable, 7 Ralph-only) |
-| `arena/knowledge/seed.jsonl` | 14 knowledge entries (decisions + portfolio) |
-| `arena/cli.ts` | Arena CLI entry point |
-| `arena/README.md` | Quick-start guide |
-
-### 3. Installed Agent Runtimes
-- **OpenClaw v2026.4.5** — `npm install -g openclaw` at `/opt/node22/bin/openclaw`
-- **Hermes Agent v0.7.0** — pip install from `/tmp/hermes-agent` (git clone)
-- **Ralph v2.6.0** — already the host project (Rust)
+| `01-prd.md` | Product definition, roadmap (3 phases), success metrics, privacy requirements, revenue streams |
+| `02-intelligence-stack.md` | Deep Confidence Engine + Monte Carlo Prediction + Personal Memory State + Path Generator |
+| `03-six-core-systems.md` | BBT, BMA, CIE, RPA, NCC, TPE — full specs with dimensions, modes, and rules |
+| `04-onboarding-and-signals.md` | Magic moment flow, device migration, behavioral signals (always-on, wearable, future) |
+| `05-character-layer.md` | Twin personality, 8 dimensions, 8 modes, character rules, evolution |
+| `06-enterprise-tier.md` | Org memory graph, team MC forecasting, BMAD governance, RBAC, deployment options |
+| `07-setup-guide.md` | Step-by-step: create ~/ocac, settings.json, symlinks, CLAUDE.md, push to GitHub |
 
 ---
 
-## THE KEY ARCHITECTURE DECISION
+## THE KEY ARCHITECTURE
 
 ```
-YOUR STUFF (permanent)              AGENTS (disposable)
-├── 13 MCPs                         ├── Ralph (Rust orchestrator)
-├── 16+ skills                      ├── OpenClaw (TS gateway)
-├── 233 expert-ai-skills            ├── Hermes (self-improving)
-├── Knowledge DB (JSONL)            └── Any future agent
-├── Notion workspace                    │
-├── Gmail, Figma, Canva, etc.          │
-└── All data & credentials              │
-         │                              │
-         └──── AGENT ADAPTER PROTOCOL ──┘
-               (the detachable layer)
+~/ocac/                          <-- TOP-LEVEL project (new)
+├── .claude/settings.json        <-- Points to ALL skill dirs
+├── CLAUDE.md                    <-- Product instructions
+├── arena/ -> symlink            <-- ralph-orchestrator/arena/
+├── docs/                        <-- OCAC specs (copied from arena/docs/ocac/)
+└── src/                         <-- OCAC source code
+
+~/ralph-orchestrator/            <-- Agent #1 (Ralph)
+~/expert-ai-skills/              <-- 233 skills
+~/superpowers/                   <-- 111 skills
+~/BMAD-METHODV7/                 <-- 50+ design workflows
 ```
 
-**Arena owns assets. Agents are pluggable. Add/remove agents without losing anything.**
+**OCAC is the product. Ralph is one agent inside it.**
 
 ---
 
-## WHAT THE USER WANTS NEXT
+## WHAT THE NEXT SESSION DOES
 
-### Digital Twin Personality Engine
-- A NEW project (not a subdirectory of ralph-orchestrator)
-- Must plug into the Arena layer (all MCPs, skills, knowledge, agents)
-- Both personal autonomous proxy AND SaaS platform for others
-- Multiple income streams: SaaS, data marketplace, API, autonomous agent income, gov contracts
-- User has **9 documents** (PRD + supporting docs) to paste in the NEXT session
+### On your LOCAL machine (Claude Desktop / WSL):
 
-### How the New Project Plugs Into Arena
-The new project should:
-1. **Symlink or import** `arena/assets/tools/mcp-registry.yml` for MCP access
-2. **Implement AgentAdapter** from `arena/adapters/protocol.ts`
-3. **Read/write** `arena/knowledge/` for cross-project knowledge sharing
-4. **Use portable skills** from the manifest (9 of 16 are agent-agnostic)
-5. Have its own `CLAUDE.md` that references Arena assets
-6. Have its own `.claude/settings.json` with all 13 MCPs configured
-7. Be a standalone GitHub repo under `whd4/`
+```bash
+# 1. Pull the branch with all the docs
+cd ~/ralph-orchestrator
+git fetch origin claude/continue-handoff-tasks-hUdpJ
+git checkout claude/continue-handoff-tasks-hUdpJ
 
-### Setup Steps for Next Session
-1. Create new repo: `whd4/digital-twin-engine` (or user's chosen name)
-2. Initialize with CLAUDE.md that references Arena
-3. Copy MCP config so all 13 servers are available
-4. User pastes 9 documents
-5. Run `/pdd` to transform PRD into implementation plan
-6. Begin building
+# 2. Follow the setup guide
+cat arena/docs/ocac/07-setup-guide.md
+
+# 3. Or just run these:
+mkdir ~/ocac && cd ~/ocac && git init
+mkdir -p .claude
+# Create .claude/settings.json (see 07-setup-guide.md)
+ln -s ~/ralph-orchestrator/arena ~/ocac/arena
+cp -r ~/ralph-orchestrator/arena/docs/ocac ~/ocac/docs
+# Create CLAUDE.md (see 07-setup-guide.md)
+
+# 4. Open Claude Code
+cd ~/ocac && claude
+```
+
+Then say:
+> "Read docs/ and arena/HANDOFF.md — I want to build the OCAC personal cognitive twin. Start with Phase 1."
 
 ---
 
-## OPEN QUESTIONS FOR NEXT SESSION
+## AVAILABLE ASSETS (Everything Below Is Ready)
 
-1. **Project name?** — "digital-twin-engine"? "personality-engine"? Something else?
-2. **Tech stack?** — TypeScript (like OpenClaw/Arena)? Python (like Hermes)? Rust (like Ralph)?
-3. **Where to host?** — Supabase (already connected, 0 projects)? Self-hosted?
-4. **What's in the 9 documents?** — PRD, architecture, personality model, data pipeline, API spec, income model, go-to-market, ...?
+| Asset | Count | Status |
+|-------|-------|--------|
+| MCP Servers | 13 | Global (GitHub, Notion, Gmail, Supabase, Canva, Figma, HuggingFace, Craft, Microsoft, Context7, Gov Contracts, Mermaid) |
+| Ralph skills | 18 | Ready (pdd, code-assist, review-pr, playwriter, etc.) |
+| Expert AI skills | 233 | Clone `whd4/expert-ai-skills` |
+| Superpowers skills | 111 | Clone `whd4/superpowers` |
+| BMAD workflows | 50+ | Clone `whd4/BMAD-METHODV7` |
+| Agent adapters | 3 | arena/adapters/ (Ralph, OpenClaw, Hermes) |
+| Knowledge base | 14 entries | arena/knowledge/seed.jsonl |
+| OCAC specs | 7 docs | arena/docs/ocac/ |
 
 ---
 
@@ -101,24 +106,8 @@ The new project should:
 ```
 Branch: claude/continue-handoff-tasks-hUdpJ
 Commits:
-  1. feat: Agent Arena foundation — detachable asset layer between agents (928 lines)
-  2. feat: wire OpenClaw + Hermes Agent adapters into Arena (461 lines)
-  3. docs: session handoff for digital twin personality engine (this file)
+  1. feat: Agent Arena foundation — detachable asset layer between agents
+  2. feat: wire OpenClaw + Hermes Agent adapters into Arena
+  3. docs: session handoff for digital twin personality engine
+  4. docs: save OCAC digital twin specs + project setup guide (THIS)
 ```
-
----
-
-## HOW TO CONTINUE
-
-In a new Claude Code session:
-
-```bash
-cd ~/ralph-orchestrator
-git checkout claude/continue-handoff-tasks-hUdpJ
-cat arena/HANDOFF.md  # Read this file
-```
-
-Then paste your 9 documents and say:
-> "Here are my docs for the digital twin personality engine. The Arena foundation is already built. Set up the new project."
-
-The next Claude instance will have everything it needs.
